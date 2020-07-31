@@ -81,9 +81,9 @@ class Encoder(nn.Module):
         blocks += [nn.BatchNorm2d(dim_out)]
         blocks += [nn.LeakyReLU(0.2)]
         self.main = nn.Sequential(*blocks)
-
         self.mu = nn.Linear(dim_out*target_size*target_size, latent_dim)
         self.logvar = nn.Linear(dim_out*target_size*target_size, latent_dim)
+
 
     def forward(self, img):
         out = self.main(img)
@@ -96,7 +96,7 @@ class Decoder(nn.Module):
     def __init__(self, img_size=512, start_size=8, latent_dim=50):
         super().__init__()
         self.latent_dim = latent_dim
-        dim_in = 2**14/img_size
+        dim_in = 2**14 // img_size
         self.dim_in = dim_in
         self.start_size = start_size
         self.decoder_dense = nn.Sequential(
@@ -110,7 +110,7 @@ class Decoder(nn.Module):
             dim_out = dim_in if cnt <= freeze_cnt else int(dim_in/2)
             blocks += [nn.ConvTranspose2d(dim_in, dim_out, 3, 2, 1, 1)]
             blocks += [nn.LeakyReLU(0.2)]
-            blocks += [nn.BatchNorm2d(0.2)]
+            blocks += [nn.BatchNorm2d(dim_out)]
             dim_in = dim_out
         
         blocks += [nn.ConvTranspose2d(dim_in, 3, 2, 1, 1)]

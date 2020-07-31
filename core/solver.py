@@ -8,6 +8,7 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 
+# import utils
 from core.model import build_nets
 from core.checkpoint import CheckpointIO
 # from metrics.eval import calculate_metrics
@@ -22,7 +23,7 @@ class Solver(nn.Module):
         self.nets = build_nets(args)
         # below setattrs are to make networks be children of Solver, e.g., for self.to(self.device)
         for name, module in self.nets.items():
-            utils.print_network(module, name)
+            # utils.print_network(module, name)
             setattr(self, name, module)
 
         if args.mode == 'train':

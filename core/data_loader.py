@@ -59,7 +59,7 @@ class TestDataset(data.Dataset):
 
 
 def get_train_loader(root, which='train', img_size=512,
-                     batch_size=32, prob=0.5, num_workers=-1):
+                     batch_size=32, prob=0.5, num_workers=4):
     print('Preparing DataLoader to fetch %s images '
           'during the training phase...' % which)
 
