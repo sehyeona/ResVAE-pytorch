@@ -1,2 +1,2 @@
 # ResVAE-pytorch
-VAE with residual blocks for AI dressroom project (team IELD)
+VAE with residual blocks for AI dressroom project (Team #### IELD )
