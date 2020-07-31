@@ -28,7 +28,7 @@ def main(args):
 
     if args.mode == 'train':
         loaders = Munch(src=get_train_loader(root=args.train_img_dir,
-                                             which='source',
+                                             which='train',
                                              img_size=args.img_size,
                                              batch_size=args.batch_size,
                                              prob=args.randcrop_prob,
