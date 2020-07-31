@@ -10,7 +10,7 @@ import torch.nn.functional as F
 
 from core.model import build_nets
 from core.checkpoint import CheckpointIO
-from metrics.eval import calculate_metrics
+# from metrics.eval import calculate_metrics
 
 
 class Solver(nn.Module):

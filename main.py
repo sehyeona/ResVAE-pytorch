@@ -6,7 +6,7 @@ from torch.backends import cudnn
 import torch
 
 from core.data_loader import get_train_loader
-from core.data_loader import get_test_loader
+# from core.data_loader import get_test_loader
 from core.solver import Solver
 
 
@@ -57,6 +57,10 @@ if __name__ == '__main__':
 
     # model arguments
     parser.add_argument('--img_size', type=int, default=512,
+                        help='Image resolution')
+    parser.add_argument('--target_size', type=int, default=8,
+                        help='Image resolution')
+    parser.add_argument('--start_size', type=int, default=8,
                         help='Image resolution')
     parser.add_argument('--latent_dim', type=int, default=50,
                         help='Latent vector dimension')

@@ -129,7 +129,7 @@ class ResVAE(torch.nn.Module):
         self.args = args
         self.build_model(args)
 
-    def build_model(args):
+    def build_model(self, args):
         self.encoder = Encoder(img_size=args.img_size,
                                target_size=args.target_size,
                                latent_dim=args.latent_dim)
