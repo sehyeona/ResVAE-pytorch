@@ -88,7 +88,6 @@ def get_train_loader(root, which='train', img_size=512,
                            batch_size=batch_size,
                            num_workers=num_workers,
                            pin_memory=True,
-                           suffle=True,
                            drop_last=True)
 
 def get_eval_loader(root, img_size=512, batch_size=32,

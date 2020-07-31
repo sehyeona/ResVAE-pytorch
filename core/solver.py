@@ -56,7 +56,7 @@ class Solver(nn.Module):
         for optim in self.optims.values():
             optim.zero_grad()
 
-    def train(self):
+    def train(self, loaders):
         args = self.args
         nets = self.nets
         optims = self.optims
