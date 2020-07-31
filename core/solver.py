@@ -67,12 +67,14 @@ class Solver(nn.Module):
         print('Start training...')
         start_time = time.time()
         for i in range(args.resume_iter, args.total_iters):
-            # train the ResVAE
-            resvae_loss, resvae_loss_ref = compute_ResVAE_loss(
-                nets, args, x)
-            self._reset_grad()
-            resvae.backward()
-            optims.ResVAE.step()
+            train_loader = loaders.src
+            for x in train_loader:
+                # train the ResVAE
+                resvae_loss, resvae_loss_ref = compute_ResVAE_loss(
+                    nets, args, x)
+                self._reset_grad()
+                resvae.backward()
+                optims.ResVAE.step()
             
             # save model checkpoints
             if (i+1) % args.save_every == 0:
