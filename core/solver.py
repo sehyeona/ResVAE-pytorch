@@ -69,7 +69,8 @@ class Solver(nn.Module):
         start_time = time.time()
         for i in range(args.resume_iter, args.total_iters):
             train_loader = loaders.src
-            for x in train_loader:
+            for _, x in enumerate(train_loader):
+                x = x[0].to(self.device)
                 # train the ResVAE
                 resvae_loss, resvae_loss_ref = compute_ResVAE_loss(
                     nets, args, x)

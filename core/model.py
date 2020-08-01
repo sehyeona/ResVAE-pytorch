@@ -83,9 +83,11 @@ class Encoder(nn.Module):
         self.main = nn.Sequential(*blocks)
         self.mu = nn.Linear(dim_out*target_size*target_size, latent_dim)
         self.logvar = nn.Linear(dim_out*target_size*target_size, latent_dim)
+        print(self.main)
 
 
     def forward(self, img):
+        print(img)
         out = self.main(img)
         out = out.view(out.size(0), -1)  # (batch, num_domains)
         mu = self.mu(out)
