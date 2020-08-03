@@ -9,7 +9,7 @@ import torch.nn as nn
 import torch.nn.functional as F
 
 # import utils
-from core.model import build_nets
+from core.model import build_nets, reparameterization
 from core.checkpoint import CheckpointIO
 # from metrics.eval import calculate_metrics
 
@@ -108,8 +108,10 @@ def compute_r_loss(x_real, x_recon):
     return loss
 
 def compute_ResVAE_loss(nets, args, x):
-    KL = compute_KL_loss(*nets.resvae.encoder(x))
-    r_loss = compute_r_loss(x, nets.resvae.decoder(x))
+    z = nets.resvae.encoder(x)
+    KL = compute_KL_loss(*z)
+    z = reparameterization(args.latent_dim, *z)
+    r_loss = compute_r_loss(x, nets.resvae.decoder(z))
     loss = KL + r_loss
     return loss, Munch(KL_loss=KL,
                        r_loss=r_loss,
