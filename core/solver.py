@@ -60,6 +60,7 @@ class Solver(nn.Module):
         args = self.args
         nets = self.nets
         optims = self.optims
+        print('1) nets: ', nets,'\n', '2) optims :',optims)
 
         # resume training if necessary
         if args.resume_iter > 0:
@@ -75,8 +76,8 @@ class Solver(nn.Module):
                 resvae_loss, resvae_loss_ref = compute_ResVAE_loss(
                     nets, args, x)
                 self._reset_grad()
-                resvae.backward()
-                optims.ResVAE.step()
+                resvae_loss.backward()
+                optims.resvae.step()
             
             # save model checkpoints
             if (i+1) % args.save_every == 0:
