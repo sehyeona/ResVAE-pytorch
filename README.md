@@ -6,7 +6,8 @@ VAE with residual blocks for AI dressroom project (Team <strong>IELD</strong>)
 ## Datasets 
 
 ```bash
-bash download.sh top-dataset
+bash download.sh top_img
+bash download.sh bottom_img
 ```
 
 
