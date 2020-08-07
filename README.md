@@ -17,7 +17,7 @@ To train ResVAE
 # celeba-hq
 python main.py --mode train \
                --lambda_reg 1 \
-               --train_img_dir data/top \
-               --print_every 10 --save_every 20 --total_iters 1000\
-               --batch_size 32 --lr 1e-4
+               --train_img_dir data/ \
+               --print_every 5 --save_every 10 --total_iters 1000\
+               --batch_size 16 --lr 1e-4
 ```
