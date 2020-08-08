@@ -1,7 +1,7 @@
 
 ## ResVAE PyTorch
 
-VAE with residual blocks for AI dressroom project (Team <strong>IELD</strong>) 
+VAE with residual blocks for AI dressroom project (Team <strong>IELD</strong>) (made by ash)
 
 ## Datasets 
 
