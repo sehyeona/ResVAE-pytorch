@@ -8,6 +8,7 @@ import torch
 from core.data_loader import get_train_loader
 # from core.data_loader import get_test_loader
 from core.solver import Solver
+from core.user import ModelUser
 
 
 def str2bool(v):
@@ -45,6 +46,12 @@ def main(args):
         solver.sample(loaders)
     elif args.mode == 'eval':
         solver.evaluate()
+##############################################
+################progressing###################
+##############################################
+    elif args.mode == 'use':
+        return ModelUser(args).vectorization(args.img_path)
+        
     elif args.mode == 'align':
         from core.wing import align_faces
         align_faces(args, args.inp_dir, args.out_dir)
@@ -54,6 +61,9 @@ def main(args):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
+    # image path for vectorization
+    parser.add_argument('--img_path', type=str, default=None,
+                        help='Image path for vectorization')
 
     # model arguments
     parser.add_argument('--img_size', type=int, default=512,

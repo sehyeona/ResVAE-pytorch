@@ -1,0 +1,11 @@
+# jupyter notebook
+.ipynb_checkpoints
+
+# vscode
+.vscode
+
+# data
+data/
+
+# venv
+venv
