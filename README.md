@@ -22,3 +22,12 @@ python main.py --mode train \
                --print_every 5 --save_every 10 --total_iters 1000\
                --batch_size 16 --lr 1e-4
 ```
+
+## vectorization 
+```
+python main.py --mode use \
+               --lambda_reg 1 \
+               --img_size 256 --img_path {put imagepath}\
+               --checkpoint_dir expr/checkpoints/top_img\
+               --resume_iter 340\
+```
