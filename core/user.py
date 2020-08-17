@@ -3,6 +3,11 @@ from os.path import join as ospj
 import time
 import datetime
 from munch import Munch
+from pathlib import Path
+
+from PIL import Image
+import numpy as np
+
 
 import torch
 import torch.nn as nn
@@ -32,6 +37,8 @@ class ModelUser(nn.Module):
             ckptio.load(step)
 
     def vectorization(self, imgPath):
-        img = Path(imgPath)
-        vector = self.nets.encoder(img)
-        return vector
+        img = Image.open(Path(imgPath)).convert('RGB')
+        print(self.nets.resvae.encoder)
+        print(img)
+        # vector = self.nets.resvae.encoder(img)
+        # return vector
