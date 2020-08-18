@@ -27,8 +27,7 @@ class CheckpointIO(object):
             module_dict = torch.load(fname)
         else :
             module_dict = torch.load(fname, map_location=torch.device('cpu'))
-        for name, module in self.module_dict.items():
-            print(name)
-            print(module)
-            # module.load_state_dict(module_dict[name])
+        # for name, module in self.module_dict.items():
+        #     # module = torch.load(module_dict[name])
+        #     module.load_state_dict(module_dict[name])
 

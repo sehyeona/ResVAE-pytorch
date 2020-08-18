@@ -83,11 +83,9 @@ class Encoder(nn.Module):
         self.main = nn.Sequential(*blocks)
         self.mu = nn.Linear(dim_out*target_size*target_size, latent_dim)
         self.logvar = nn.Linear(dim_out*target_size*target_size, latent_dim)
-#         print('Encoder: \n',self.main)
 
 
     def forward(self, img):
-        print('img size is : ', img.size())
         out = self.main(img)
         out = out.view(out.size(0), -1)  # (batch, num_domains)
         mu = self.mu(out)
@@ -106,32 +104,23 @@ class Decoder(nn.Module):
             nn.LeakyReLU(0.2)
         )
         repeat_num = int(np.log2(img_size) - np.log2(start_size)) - 1
-        print(repeat_num, start_size*(2**repeat_num))
         freeze_cnt = int(repeat_num/2)
         blocks = []
         for cnt in range(repeat_num):
             dim_out = dim_in if cnt <= freeze_cnt else int(dim_in/2)
-            print('dim_in:', dim_in, 'dim_out:', dim_out)
             blocks += [nn.ConvTranspose2d(dim_in, dim_out, 3, 2, 1, 1)]
             blocks += [nn.LeakyReLU(0.2)]
             blocks += [nn.BatchNorm2d(dim_out)]
             dim_in = dim_out
-        print('final dim in:',dim_in)
         blocks += [nn.ConvTranspose2d(dim_in, 3, 3, 2, 1, 1)]
         blocks += [nn.LeakyReLU(0.2)]
         self.main = nn.Sequential(*blocks)
-#         print('decoder : \n', self.decoder_dense)
-#         print(self.main)
 
     def forward(self, z):
         batch_size = z.size(0)
-        print(batch_size, 'first is good\n')
         hidden = self.decoder_dense(z).view(
             batch_size, self.dim_in, self.start_size, self.start_size,)
-        print("hidden is fine")
-        print("hidden shape :", hidden.size())
         recon_x = self.main(hidden)
-        print(recon_x.size())
         return recon_x
 
 class ResVAE(torch.nn.Module):
@@ -150,7 +139,6 @@ class ResVAE(torch.nn.Module):
 
     def forward(self, x):
         z = reparameterization(latent_dim, *self.encoder(x))
-        print('size of z after reparmeterization', z[1].size())
         x_recon = self.decoder(z)
         return x_recon
 
